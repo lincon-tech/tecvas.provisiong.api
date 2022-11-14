@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="AzureAuthentication\**" />
+    <Compile Remove="NewFolder\**" />
+    <EmbeddedResource Remove="AzureAuthentication\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="AzureAuthentication\**" />
+    <None Remove="NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="Marvin.StreamExtensions" Version="1.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.9" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.19.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.19.0" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.3.1" />
+    <PackageReference Include="RabbitMQ.Client.Core.DependencyInjection" Version="5.0.0" />
+    <PackageReference Include="System.DirectoryServices" Version="4.7.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.19.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Techrunch.TecVas.Core\Techrunch.TecVas.Core.csproj" />
+    <ProjectReference Include="..\Techrunch.TecVas.Data\Techrunch.TecVas.Data.csproj" />
+    <ProjectReference Include="..\Techrunch.TecVas.Entities\Techrunch.TecVas.Entities.csproj" />
+    <ProjectReference Include="..\Techrunch.TecVas.Infrastructure\Techrunch.TecVas.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

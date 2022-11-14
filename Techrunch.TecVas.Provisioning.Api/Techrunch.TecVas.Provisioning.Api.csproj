@@ -1,0 +1,93 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Techrunch.TecVas.Provisioning.Api</RootNamespace>
+    <UserSecretsId>66cfe7e8-9a43-4325-b9a3-fa718c4dd90a</UserSecretsId>
+    <ApplicationIcon />
+    <OutputType>Exe</OutputType>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Techrunch.TecVas.Provisioning.Api.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\nimcController.cs" />
+    <Compile Remove="Controllers\v1\ProductsController.cs" />
+    <Compile Remove="Controllers\v1\rest\ProductsController.cs" />
+    <Compile Remove="Helpers\tmp\AbujaDiscoController.cs" />
+    <Compile Remove="Helpers\tmp\AuthenticationController.cs" />
+    <Compile Remove="Helpers\tmp\BulkSMSController.cs" />
+    <Compile Remove="Helpers\tmp\CarpaddyController.cs" />
+    <Compile Remove="Helpers\tmp\CornerstoneController.cs" />
+    <Compile Remove="Helpers\tmp\EkoElectricController.cs" />
+    <Compile Remove="Helpers\tmp\IbadanDiscoController.cs" />
+    <Compile Remove="Helpers\tmp\IkejaElectricPurchaseController.cs" />
+    <Compile Remove="Helpers\tmp\JambCandidatesPINController.cs" />
+    <Compile Remove="Helpers\tmp\JosElectricController.cs" />
+    <Compile Remove="Helpers\tmp\KadunaController.cs" />
+    <Compile Remove="Helpers\tmp\KedcoController.cs" />
+    <Compile Remove="Helpers\tmp\MultiChoiceDstvController.cs" />
+    <Compile Remove="Helpers\tmp\MultiChoiceGotvController.cs" />
+    <Compile Remove="Helpers\tmp\MutualMotoVehicleInsuranceController.cs" />
+    <Compile Remove="Helpers\tmp\PortHarcourtController.cs" />
+    <Compile Remove="Helpers\tmp\ShowmaxVouchers.cs" />
+    <Compile Remove="Helpers\tmp\SmileRechargeController.cs" />
+    <Compile Remove="Helpers\tmp\SpectranetController.cs" />
+    <Compile Remove="Helpers\tmp\StartimesController.cs" />
+    <Compile Remove="Helpers\tmp\WaecPINController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="IdentityModel" Version="4.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.26" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.1.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.19.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
+    <PackageReference Include="RabbitMQ.Client.Core.DependencyInjection" Version="5.0.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.6.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.19.0" />
+    <PackageReference Include="YamlDotNet.NetCore" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Techrunch.TecVas.Provisioning.Api.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\v1\rest\" />
+    <Folder Include="Helpers\tmp\" />
+    <Folder Include="logs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Techrunch.TecVas.Core\Techrunch.TecVas.Core.csproj" />
+    <ProjectReference Include="..\Techrunch.TecVas.Entities\Techrunch.TecVas.Entities.csproj" />
+    <ProjectReference Include="..\Techrunch.TecVas.Infrastructure\Techrunch.TecVas.Infrastructure.csproj" />
+    <ProjectReference Include="..\Techrunch.TecVas.Services\Techrunch.TecVas.Services.csproj" />
+  </ItemGroup>
+
+
+</Project>
