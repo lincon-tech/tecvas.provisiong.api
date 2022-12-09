@@ -1,7 +1,9 @@
 **Clone**
 Create a Local Directory
 mkdir repo
+
 git clone https://github.com/techrunchsolutions/tecvas.provisioning.api
+
 cd tecvas.provisioning.api
 
 ---
