@@ -1,0 +1,126 @@
+---
+#version: '3.8'
+#services:
+#  postgres_db:
+#   image: postgres:14.1-alpine
+#   restart: always
+#    environment:
+#     - POSTGRES_USER=tecvasuser
+#     - POSTGRES_PASSWORD=Tecv#s4r0ck
+#   ports:
+#     - '5432:5432'
+#  rabbitmq:
+#   image: rabbitmq:3.8-management-alpine
+#   depends_on:
+#     - postgres_db
+#   environment:
+#   - RABBITMQ_DEFAULT_USER=vtuadmin
+#     - RABBITMQ_DEFAULT_PASS=Vtu@adm1na
+#   ports:
+#    - '5672:5672'
+#    - '15672:15672'
+
+#   volumes:
+#   - postgres_db:/var/lib/postgresql/data
+#volumes:
+#postgres_db:
+#  driver: local
+
+#version: '3.5'
+#services:
+# postgres:
+# 3  container_name: postgres_container
+#   image: postgres
+#   environment:
+#     POSTGRES_USER: ${POSTGRES_USER:-postgres}
+#     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+#    PGDATA: /data/postgres
+#   volumes:
+#      - postgres:/data/postgres
+#   ports:
+#     - "5432:5432"
+#   networks:
+#     - postgres
+#   restart: unless-stopped
+#pgadmin:
+#   container_name: pgadmin_container
+#    image: dpage/pgadmin4
+#   environment:
+#     PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+#     PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+#     PGADMIN_CONFIG_SERVER_MODE: 'False'
+#  volumes:
+#     - pgadmin:/var/lib/pgadmin
+#   ports:
+#     - "${PGADMIN_PORT:-5050}:80"
+#   networks:
+#     - postgres
+#   restart: unless-stopped
+#networks:
+# postgres:
+#  driver: bridge
+#volumes:
+#   postgres:
+#  pgadmin:
+#white_check_mark
+#eyes
+#raised_hands
+
+
+version: "3.9"
+services:
+  tecvas_api:
+    build: .
+    depends_on:
+      - postgres
+      - rabbitmq
+    ports:
+      - '8887:8887'
+
+  postgres:
+    image: postgres:10.5
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=tecvasuser
+      - POSTGRES_PASSWORD=Tecv#s4r0ck
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+      # copy the sql script to create tables
+      - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      # copy the sql script to fill tables
+      - ./sql/fill_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql
+
+  rabbitmq:
+    image: rabbitmq:3.8-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+      # data persistence
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    #networks:
+    #  - tecvas-network
+
+    # queues and messages data of the container will be stored on the host
+    environment:
+      - RABBITMQ_USER=vtuadmin
+      - RABBITMQ_PASS=Vtu@adm1na
+      - RABBITMQ_DEFAULT_VHOST = "/"
+    restart: unless-stopped
+#networks:
+#  tecvas-network:
+#   driver: bridge
+volumes:
+  logs-folder:
+    name: ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+
+    # name: ${log_rabbitmq_management}
+    driver: local

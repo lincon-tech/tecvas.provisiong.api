@@ -13,15 +13,16 @@ COPY ["Techrunch.TecVas.Entities/Techrunch.TecVas.Entities.csproj", "Techrunch.T
 COPY ["Techrunch.TecVas.Core/Techrunch.TecVas.Core.csproj", "Techrunch.TecVas.Core/"]
 COPY ["Techrunch.TecVas.Services/Techrunch.TecVas.Services.csproj", "Techrunch.TecVas.Services/"]
 COPY ["Techrunch.TecVas.Data/Techrunch.TecVas.Data.csproj", "Techrunch.TecVas.Data/"]
-RUN dotnet restore "Techrunch.TecVas.Provisioning.Api/Techrunch.TecVas.Provisioning.Api.csproj"
+RUN dotnet restore "Techrunch.TecVas.Provisioning.Api.csproj"
 COPY . .
-WORKDIR "/src/Techrunch.TecVas.Provisioning.Api"
+WORKDIR "/app/Techrunch.TecVas.Provisioning.Api"
 RUN dotnet build "Techrunch.TecVas.Provisioning.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "Techrunch.TecVas.Provisioning.Api.csproj" -c Release -o /app/publish
 
-FROM base AS final
+#FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Techrunch.TecVas.Provisioning.Api.dll"]
+
